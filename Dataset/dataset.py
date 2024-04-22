@@ -11,9 +11,9 @@ class steamGamesDataset(Dataset):
         # self.dataset = pd.concat([lhs_dataframe, rhs_dataframe], axis=1)
         
     def __len__(self):
-        return len(self.dataset)
+        return len(self.lhs_df)
     
     def __getitem__(self, index):
-        inp_features = self.lhs_df.iloc[index].to_numpy()
-        value = self.rhs_df.iloc[index].to_numpy()
+        inp_features = torch.tensor(self.lhs_df.iloc[index])
+        value = torch.tensor(self.rhs_df.iloc[index])
         return inp_features, value
